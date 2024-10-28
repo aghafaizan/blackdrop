@@ -1,55 +1,3 @@
-// Sample wallpaper data with categories
-const wallpapers = [
-  {
-    id: 1,
-    url: "https://picsum.photos/id/1018/1080/1920",
-    title: "Mountain View",
-    category: "nature",
-  },
-  {
-    id: 2,
-    url: "https://picsum.photos/id/1015/1080/1920",
-    title: "Alpine Lake",
-    category: "nature",
-  },
-  {
-    id: 3,
-    url: "https://picsum.photos/id/1020/1080/1920",
-    title: "Abstract Shapes",
-    category: "abstract",
-  },
-  {
-    id: 4,
-    url: "https://picsum.photos/id/1019/1080/1920",
-    title: "Tropical Beach",
-    category: "nature",
-  },
-  {
-    id: 5,
-    url: "https://picsum.photos/id/1021/1080/1920",
-    title: "City Lights",
-    category: "urban",
-  },
-  {
-    id: 6,
-    url: "https://picsum.photos/id/1039/1080/1920",
-    title: "Geometric Patterns",
-    category: "abstract",
-  },
-  {
-    id: 7,
-    url: "https://picsum.photos/id/1042/1080/1920",
-    title: "Urban Skyline",
-    category: "urban",
-  },
-  {
-    id: 8,
-    url: "https://picsum.photos/id/1043/1080/1920",
-    title: "Forest Path",
-    category: "nature",
-  },
-];
-
 // DOM elements
 const wallpaperGrid = document.getElementById("wallpaper-grid");
 const searchInput = document.getElementById("search");
@@ -73,6 +21,60 @@ function createWallpaperCard(wallpaper) {
     `;
   return card;
 }
+
+//faizan
+// JavaScript for popup and download logic
+
+// Variables to control countdown
+let countdownInterval;
+let countdown = 10; // Default 10 seconds countdown
+
+// Function to handle wallpaper download with a countdown
+function handleDownloadWithPopup(url, title) {
+  const popup = document.getElementById("download-popup");
+  const countdownElement = document.getElementById("countdown");
+
+  // Reset countdown
+  countdown = 10;
+  countdownElement.textContent = countdown;
+
+  // Show the popup
+  popup.classList.remove("hidden");
+
+  // Update countdown every second
+  countdownInterval = setInterval(() => {
+    countdown--;
+    countdownElement.textContent = countdown;
+    if (countdown <= 0) {
+      clearInterval(countdownInterval);
+      popup.classList.add("hidden"); // Hide the popup
+      downloadWallpaper(url, title); // Trigger the download
+    }
+  }, 1000);
+}
+
+// Function to handle closing the popup and canceling the download
+function closePopup() {
+  const popup = document.getElementById("download-popup");
+
+  // Hide the popup
+  popup.classList.add("hidden");
+
+  // Clear the countdown interval to stop the countdown
+  clearInterval(countdownInterval);
+}
+
+// Event listener for the "Download" button to show the popup
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("download-btn")) {
+    const url = e.target.getAttribute("data-url");
+    const title = e.target.getAttribute("data-title");
+    handleDownloadWithPopup(url, title);
+  }
+});
+
+// Event listener for the "X" button to close the popup
+document.getElementById("close-popup").addEventListener("click", closePopup);
 
 // Render wallpapers to the grid
 function renderWallpapers(wallpapers) {
@@ -120,13 +122,13 @@ categoriesNav.addEventListener("click", (e) => {
 });
 
 // Handle wallpaper download
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("download-btn")) {
-    const url = e.target.getAttribute("data-url");
-    const title = e.target.getAttribute("data-title");
-    downloadWallpaper(url, title);
-  }
-});
+// document.addEventListener("click", (e) => {
+//   if (e.target.classList.contains("download-btn")) {
+//     const url = e.target.getAttribute("data-url");
+//     const title = e.target.getAttribute("data-title");
+//     downloadWallpaper(url, title);
+//   }
+// });
 
 // Download wallpaper
 function downloadWallpaper(url, title) {

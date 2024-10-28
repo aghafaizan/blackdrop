@@ -14,6 +14,11 @@
         <nav id="categories" aria-label="Wallpaper categories">
           <button class="category-btn active" data-category="all">All</button>
           <button class="category-btn" data-category="nature">Nature</button>
+          <button class="category-btn" data-category="nature">Nature</button>
+          <button class="category-btn" data-category="nature">Nature</button>
+          <button class="category-btn" data-category="nature">Nature</button>
+          <button class="category-btn" data-category="nature">Nature</button>
+          <button class="category-btn" data-category="nature">Nature</button>
           <button class="category-btn" data-category="abstract">
             Abstract
           </button>
@@ -32,9 +37,29 @@
         />
       </div>
     </div>
+
+    <!-- Popup Structure with Close Button -->
+    <div id="download-popup" class="popup hidden">
+      <div class="popup-content">
+        <!-- Close Button -->
+        <button id="close-popup" class="close-btn">&times;</button>
+        <div class="ad-banner">
+          <!-- Replace with your ad/banner content -->
+          <img
+            src="https://www.shutterstock.com/image-illustration/four-hundred-3d-illustration-golden-260nw-1985281622.jpg"
+            alt="Advertisement"
+          />
+        </div>
+        <p>
+          Please wait <span id="countdown">10</span> seconds for the download...
+        </p>
+      </div>
+    </div>
+
     <footer>
       <p>&copy; 2023 BlackDrop Wallpaper Downloader. All rights reserved.</p>
     </footer>
+    <script src="data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
