@@ -52,7 +52,6 @@ const wallpapers = [
 
 // DOM elements
 const wallpaperGrid = document.getElementById("wallpaper-grid");
-const featuredGrid = document.getElementById("featured-grid");
 const searchInput = document.getElementById("search");
 const categoriesNav = document.getElementById("categories");
 const notFoundMessage = document.getElementById("not-found");
@@ -76,23 +75,18 @@ function createWallpaperCard(wallpaper) {
 }
 
 // Render wallpapers to the grid
-function renderWallpapers(wallpapers, gridElement) {
-  gridElement.innerHTML = "";
-  wallpapers.forEach((wallpaper) => {
-    const card = createWallpaperCard(wallpaper);
-    gridElement.appendChild(card);
-  });
-}
-
-// Render all wallpapers
-function renderAllWallpapers(wallpapers) {
+function renderWallpapers(wallpapers) {
+  wallpaperGrid.innerHTML = "";
   if (wallpapers.length === 0) {
     notFoundMessage.classList.remove("hidden");
     wallpaperGrid.classList.add("hidden");
   } else {
     notFoundMessage.classList.add("hidden");
     wallpaperGrid.classList.remove("hidden");
-    renderWallpapers(wallpapers, wallpaperGrid);
+    wallpapers.forEach((wallpaper) => {
+      const card = createWallpaperCard(wallpaper);
+      wallpaperGrid.appendChild(card);
+    });
   }
 }
 
@@ -109,7 +103,7 @@ function filterWallpapers() {
 searchInput.addEventListener("input", (e) => {
   currentSearchTerm = e.target.value;
   const filteredWallpapers = filterWallpapers();
-  renderAllWallpapers(filteredWallpapers);
+  renderWallpapers(filteredWallpapers);
 });
 
 // Handle category selection
@@ -121,7 +115,7 @@ categoriesNav.addEventListener("click", (e) => {
       .forEach((btn) => btn.classList.remove("active"));
     e.target.classList.add("active");
     const filteredWallpapers = filterWallpapers();
-    renderAllWallpapers(filteredWallpapers);
+    renderWallpapers(filteredWallpapers);
   }
 });
 
@@ -144,17 +138,9 @@ function downloadWallpaper(url, title) {
   document.body.removeChild(link);
 }
 
-// Get featured wallpapers (random selection)
-function getFeaturedWallpapers(count) {
-  const shuffled = wallpapers.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
-
 // Initialize the application
 function init() {
-  const featuredWallpapers = getFeaturedWallpapers(3);
-  renderWallpapers(featuredWallpapers, featuredGrid);
-  renderAllWallpapers(wallpapers);
+  renderWallpapers(wallpapers);
 }
 
 // Run the initialization function when the DOM is fully loaded
