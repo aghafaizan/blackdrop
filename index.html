@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallpaper Downloader</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Wallpaper Downloader</h1>
+        <input type="text" id="search" placeholder="Search wallpapers..." />
+        <nav id="categories" aria-label="Wallpaper categories">
+          <button class="category-btn active" data-category="all">All</button>
+          <button class="category-btn" data-category="nature">Nature</button>
+          <button class="category-btn" data-category="abstract">
+            Abstract
+          </button>
+          <button class="category-btn" data-category="urban">Urban</button>
+        </nav>
+      </header>
+      <section id="featured" aria-label="Featured wallpapers">
+        <h2>Featured Wallpapers</h2>
+        <div id="featured-grid">
+          <!-- Featured wallpapers will be dynamically inserted here -->
+        </div>
+      </section>
+      <main id="wallpaper-grid">
+        <!-- Wallpapers will be dynamically inserted here -->
+      </main>
+      <div id="not-found" class="hidden">
+        <p>No wallpapers found. Try a different search term.</p>
+        <img
+          src="https://media.giphy.com/media/14uQ3cOFteDaU/giphy.gif"
+          alt="Not found"
+          class="not-found-gif"
+        />
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2023 Wallpaper Downloader. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
