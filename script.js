@@ -90,7 +90,7 @@ function renderWallpapers(wallpapers) {
   }
 }
 
-// Filter wallpapers based on current category and search term
+// Filter wallpapers based on current category and search termfunction filterWallpapers() {
 function filterWallpapers() {
   return wallpapers.filter(
     (wallpaper) =>
